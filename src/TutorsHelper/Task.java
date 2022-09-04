@@ -16,7 +16,7 @@ public class Task {
     public static void setTasks() {
         JLabel previousTask = new JLabel("");
         for (int i = 0; i < tasksAmount; i++) {
-            JLabel task = newTaskLabel("#" + Integer.toString(i + 1));
+            JLabel task = newTaskLabel(Integer.toString(i + 1));
             VerticalAlign(task, "top");
             if (i == 0) {
                 HorizontalAlign(task, "left");
@@ -45,7 +45,7 @@ public class Task {
         label.setForeground(Color.decode("#000000"));
         label.setOpaque(true);
         label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        label.setFont(new Font("Arial", 0, 12));
+        label.setFont(new Font("Arial", 0, 16));
         Window.components.add(label);
         return label;
     }

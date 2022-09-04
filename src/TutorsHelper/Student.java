@@ -19,7 +19,7 @@ public class Student {
     public static void setStudents() {
         // set students
         for (int i = 0; i < getStudentsList().size(); i++) {
-            JLabel student = newStudentLabel((i+1) + ". " + getStudentsList().get(i));
+            JLabel student = newStudentLabel("  " + (i+1) + ". " + getStudentsList().get(i));
             HorizontalAlign(student, "left");
             if (i == 0 ) {
                 VerticalAlign(student, "top");
@@ -38,12 +38,12 @@ public class Student {
 
     private static JLabel newStudentLabel(String name) {
         JLabel label = new JLabel(name, SwingConstants.LEFT);
-        label.setSize(130, 20);
+        label.setSize(200, 22);
         label.setBackground(studentColor);
         label.setForeground(Color.decode("#000000"));
         label.setOpaque(true);
         label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        label.setFont(new Font("Arial", 0, 12));
+        label.setFont(new Font("Arial", 0, 14));
         Window.components.add(label);
         return label;
     }

@@ -6,6 +6,9 @@ import java.util.Vector;
 import static TutorsHelper.Libs.*;
 
 public class Window extends JFrame {
+    public static Vector<JComponent> components = new Vector<>();
+    public static JLayeredPane mainPanel = new JLayeredPane();
+
     private Point GetCentralLocation() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int screenWidth = (int)screenSize.getWidth();
@@ -16,13 +19,12 @@ public class Window extends JFrame {
         Point coordinates = new Point(centerX, centerY);
         return coordinates;
     }
-    public static Vector<JComponent> components = new Vector<>();
     Window() {
         super("ИКБО-02-21, JAVA_3sem");
 
         // set content
         Grid.setGrid();
-        JPanel mainPanel = new JPanel(null);
+        mainPanel.setOpaque(true);
         mainPanel.setBackground(backgroundColor);
         components.forEach(mainPanel::add);
         getContentPane().add(mainPanel);

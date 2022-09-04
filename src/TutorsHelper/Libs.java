@@ -6,11 +6,12 @@ import java.awt.*;
 public class Libs {
     public static int FRAME__WIDTH = 1280;
     public static int FRAME__HEIGHT = 720;
-    public static Color backgroundColor = Color.decode("#e5e5e5");
-    public static Color taskColor = Color.decode("#cdc5c2");
-    public static Color studentColor = Color.decode("#cdc5c2");
-    public static Color checkBoxColor__true = Color.decode("#6495ed");
-    public static Color checkBoxColor__false = Color.decode("#fc8e86");
+    public static Color backgroundColor = Color.decode("#1F2833");
+    public static Color taskColor = Color.decode("#9D8D8F");
+    public static Color studentColor = Color.decode("#9D8D8F");
+    public static Color activeColor = Color.decode("#eeeeee");
+    public static Color checkBoxColor__true = Color.decode("#AFD275");
+    public static Color checkBoxColor__false = Color.decode("#CC8Ea3");
     public static Color borderColor = Color.decode("#4d5542");
 
     public static final int tasksAmount = 32;

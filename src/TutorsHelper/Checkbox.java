@@ -1,6 +1,9 @@
 package TutorsHelper;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -16,6 +19,7 @@ import static TutorsHelper.Task.getTempTask;
 public class Checkbox {
     private static ArrayList<JButton> checkboxList = new ArrayList<>();
     private static List<String> config = getConfig();
+    private static Dimension size = new Dimension(28, 22);
 
     public static void setCheckboxes() {
         for (int i = 0; i < getStudents().size(); i++) {
@@ -29,32 +33,32 @@ public class Checkbox {
                 checkboxList.add(checkbox);
             }
         }
-        ConfigureCheckboxes(checkboxList, config);
+        ConfigureCheckboxes();
     }
     public static ArrayList<JButton> getCheckboxes() {
         return checkboxList;
     }
 
+    public static Dimension getSize() { return size; }
+
     private static JButton newCheckbox() {
         JButton checkbox = new JButton();
-        checkbox.setSize(28, 20);
+        checkbox.setSize(size);
         checkbox.setBackground(checkBoxColor__false);
         checkbox.setOpaque(true);
-        checkbox.setBorder(BorderFactory.createLineBorder(borderColor, 1));
+        checkbox.setBorder(BorderFactory.createLineBorder(borderColor, 0));
+        checkbox.addMouseListener(new CheckboxMouseListener(checkbox));
         Window.components.add(checkbox);
-        setClickListener(checkbox);
         return checkbox;
     }
-    private static void setClickListener(JButton checkbox) {
-        checkbox.addActionListener(e -> {
-            checkbox.setBackground(
-                    checkbox.getBackground() == checkBoxColor__true ?
-                            checkBoxColor__false :
-                            checkBoxColor__true
-
-            );
-            setConfig();
-        });
+    public static JLabel newLine(Dimension size) {
+        JLabel line = new JLabel();
+        line.setSize(size);
+        line.setOpaque(true);
+        line.setBackground(Color.decode("#969992"));
+        line.setBorder(BorderFactory.createLineBorder(borderColor, 1));
+        // Window.mainPanel.add(line, 2, 0);
+        return line;
     }
 
     private static List<String> getConfig() {
@@ -64,7 +68,7 @@ public class Checkbox {
             throw new RuntimeException(e);
         }
     }
-    private static void setConfig() {
+    public static void setConfig() {
         StringBuilder updatedConfig = new StringBuilder();
         int cnt = 0;
         for (JButton checkbox:
@@ -82,19 +86,21 @@ public class Checkbox {
             throw new RuntimeException(e);
         }
     }
-    private static void ConfigureCheckboxes(ArrayList<JButton> CheckBoxes, List<String> config) {
+    public static void ConfigureCheckboxes() {
+        if (config.size() != getStudents().size()) {
+            for (JButton checkbox:
+                 checkboxList) {
+                checkbox.setBackground(checkBoxColor__false);
+            }
+            return;
+        }
         for(int i = 0; i < config.size(); i++) {
             for (int j = 0; j < tasksAmount; j++) {
-                CheckBoxes.get(i*config.size() + j).setBackground(
+                checkboxList.get(i*tasksAmount + j).setBackground(
                         config.get(i).charAt(j) == '+' ?
                                 checkBoxColor__true :
                                 checkBoxColor__false
                 );
-                /*CheckBoxes.get(i*config.size() + j).setBorder(
-                        config.get(i).charAt(0) == '+' ?
-                                BorderFactory.createLineBorder(borderColor, 1) :
-                                BorderFactory.createLineBorder(borderColor, 1)
-                );*/
             }
         }
     }
