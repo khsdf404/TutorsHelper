@@ -23,8 +23,8 @@ public class Window extends JFrame {
         // set content
         Grid.setGrid();
         JPanel mainPanel = new JPanel(null);
-        mainPanel.setBackground(Color.decode(backgroundColor));
-        components.forEach((elem) -> mainPanel.add(elem));
+        mainPanel.setBackground(backgroundColor);
+        components.forEach(mainPanel::add);
         getContentPane().add(mainPanel);
 
 

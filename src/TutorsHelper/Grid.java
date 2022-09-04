@@ -11,21 +11,27 @@ import java.util.List;
 import static TutorsHelper.Libs.*;
 
 public class Grid {
-    private static ArrayList<JLabel> Tasks = new ArrayList<>();
-    private static ArrayList<JLabel> Students = new ArrayList<>();
-    private static ArrayList<JButton> CheckBoxes = new ArrayList<>();
 
-    private static final int tasksAmount = 32;
+
+
 
     public Grid() {};
     static void setGrid() {
         // GroupMembers.txt
-        List<String> lines;
+        List<String> studentLines;
         try {
-            lines = Files.readAllLines(Paths.get("GroupMembers.txt"), StandardCharsets.UTF_8);
+            studentLines = Files.readAllLines(Paths.get("GroupMembers.txt"), StandardCharsets.UTF_8);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        // GroupMembers.txt
+        List<String> configLines;
+        try {
+            configLines = Files.readAllLines(Paths.get("TasksConfig.txt"), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
 
         // for grid settings
         JLabel tempTask = Elements.newTaskLabel("temp");
@@ -55,8 +61,8 @@ public class Grid {
             Tasks.add(task);
         }
         // set students
-        for (int i = 0; i < lines.size(); i++) {
-            JLabel student = Elements.newStudentLabel((i+1) + ". " + lines.get(i));
+        for (int i = 0; i < studentLines.size(); i++) {
+            JLabel student = Elements.newStudentLabel((i+1) + ". " + studentLines.get(i));
             HorizontalAlign(student, "left");
             if (i == 0 ) {
                 VerticalAlign(student, "top");
@@ -80,6 +86,9 @@ public class Grid {
                 CheckBoxes.add(checkbox);
             }
         }
+        Elements.ConfigureCheckboxes(CheckBoxes, configLines);
+
+
 
         // delete trash
         Window.components.remove(tempTask);
