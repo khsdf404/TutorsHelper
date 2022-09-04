@@ -5,9 +5,12 @@ import javax.swing.*;
 public class Libs {
     public static int FRAME__WIDTH = 1280;
     public static int FRAME__HEIGHT = 720;
-    public static int realScore = 0;
-    public static int madridScore = 0;
-    public static String lastScored = "--";
+    public static String backgroundColor = "#e5e5e5";
+    public static String taskColor = "#cdc5c2";
+    public static String studentColor = "#cdc5c2";
+    public static String checkBoxColor__true = "#94ffd4";
+    public static String checkBoxColor__false = "#ff889d";
+    public static String borderColor = "#4d5542";
 
     public static void HorizontalAlign(JComponent button, String aligment) {
         if (aligment == "center")
@@ -39,10 +42,5 @@ public class Libs {
             button.setLocation(button.getX(), element.getY() - button.getHeight());
         else if (aligment == "under")
             button.setLocation(button.getX(), element.getY() + element.getHeight());
-    }
-    public static String GetWinner() {
-        return  realScore == madridScore ? "DRAW" :
-                madridScore < realScore ? "Real" :
-                        "Madrid";
     }
 }

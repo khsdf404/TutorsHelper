@@ -18,12 +18,12 @@ public class Window extends JFrame {
     }
     public static Vector<JComponent> components = new Vector<>();
     Window() {
-        super("Football match");
+        super("ИКБО-02-21, JAVA_3sem");
 
         // set content
         Grid.setGrid();
         JPanel mainPanel = new JPanel(null);
-        mainPanel.setBackground(Color.decode("#454545"));
+        mainPanel.setBackground(Color.decode(backgroundColor));
         components.forEach((elem) -> mainPanel.add(elem));
         getContentPane().add(mainPanel);
 

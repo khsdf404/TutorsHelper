@@ -11,7 +11,11 @@ import java.util.List;
 import static TutorsHelper.Libs.*;
 
 public class Grid {
+    private static ArrayList<JLabel> Tasks = new ArrayList<>();
     private static ArrayList<JLabel> Students = new ArrayList<>();
+    private static ArrayList<JButton> CheckBoxes = new ArrayList<>();
+
+    private static final int tasksAmount = 32;
 
     public Grid() {};
     static void setGrid() {
@@ -36,8 +40,8 @@ public class Grid {
 
         // set tasks
         JLabel previousTask = new JLabel("");
-        for (int i = 0; i < 32; i++) {
-            JLabel task = Elements.newTaskLabel("#" + Integer.toString(i + 1) + ".");
+        for (int i = 0; i < tasksAmount; i++) {
+            JLabel task = Elements.newTaskLabel("#" + Integer.toString(i + 1));
             VerticalAlign(task, "top");
             if (i == 0) {
                 HorizontalAlign(task, "left");
@@ -48,6 +52,7 @@ public class Grid {
                 task.setLocation(task.getX(), task.getY() + 30);
             }
             previousTask = task;
+            Tasks.add(task);
         }
         // set students
         for (int i = 0; i < lines.size(); i++) {
@@ -63,9 +68,21 @@ public class Grid {
             }
             Students.add(student);
         }
+        // set checkboxes
+        for (int i = 0; i < Students.size(); i++) {
+            JLabel currStudent = Students.get(i);
+            int startX = currStudent.getX() + currStudent.getWidth();
+            int yPos = currStudent.getY();
+            for (int j = 0; j < tasksAmount; j++) {
+                int xPos = startX + tempTask.getWidth() * j;
+                JButton checkbox = Elements.newCheckbox();
+                checkbox.setLocation(xPos, yPos);
+                CheckBoxes.add(checkbox);
+            }
+        }
+
         // delete trash
         Window.components.remove(tempTask);
         Window.components.remove(tempStudent);
-
     }
 }
