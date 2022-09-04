@@ -2,7 +2,6 @@ package TutorsHelper;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
 public class Libs {
     public static int FRAME__WIDTH = 1280;
@@ -15,9 +14,7 @@ public class Libs {
     public static Color borderColor = Color.decode("#4d5542");
 
     public static final int tasksAmount = 32;
-    public static ArrayList<JLabel> Tasks = new ArrayList<>();
-    public static ArrayList<JLabel> Students = new ArrayList<>();
-    public static ArrayList<JButton> CheckBoxes = new ArrayList<>();
+
 
     public static void HorizontalAlign(JComponent button, String aligment) {
         if (aligment == "center")

@@ -1,11 +1,8 @@
 # Added: 
-	1. TaskConfig.txt
-	2. UpdateConfig();
-# Did: 
-	1. Now can configure checkboxes according to config
+	1. Studens, Tasks, CheckBoxes classes
 # Edited: 
-	1. Colors in Libs (String type -> Color type) 
-	2. Moved all Element Lists in Libs.java
-	3. newCheckbox: added ActionListener for LMB click
+	Moved all methods and fields to their classes
 #ToDo: 
-	1. Do a Studens, Tasks, CheckBoxes classes. 
+	---
+#Deleted: 
+	1. Elements.java
