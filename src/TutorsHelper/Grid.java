@@ -1,49 +1,71 @@
 package TutorsHelper;
 
 import javax.swing.*;
-import java.awt.*;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+
 import static TutorsHelper.Libs.*;
 
 public class Grid {
-    private static JLabel winnerState, lastScoredState, scoreState;
-    private static JButton realBtn, madridBtn;
-    public static void UpdateWinner() {
-        winnerState.setText("Winner: " + GetWinner());
-    }
-    public static void UpdateLastScored() {
-        lastScoredState.setText("Last scored: " + lastScored);
-    }
-    public static void UpdateScore() {
-        scoreState.setText("AC Real " + realScore + ":" + madridScore + "  Madrid");
-    }
+    private static ArrayList<JLabel> Students = new ArrayList<>();
 
     public Grid() {};
     static void setGrid() {
-        winnerState = Elements.newLabel("Winner: DRAW",
-                new Dimension(300, 40),20);
-        VerticalAlign(winnerState, "top");
-        winnerState.setLocation(winnerState.getX(), winnerState.getY() + 30);
+        // GroupMembers.txt
+        List<String> lines;
+        try {
+            lines = Files.readAllLines(Paths.get("GroupMembers.txt"), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        // for grid settings
+        JLabel tempTask = Elements.newTaskLabel("temp");
+        VerticalAlign(tempTask, "top");
+        HorizontalAlign(tempTask, "left");
+        tempTask.setLocation(tempTask.getX() + 200, tempTask.getY() + 30);
+        JLabel tempStudent = Elements.newStudentLabel("temp");
+        HorizontalAlign(tempStudent, "left");
+        VerticalAlign(tempStudent, "top");
+        tempStudent.setLocation(tempStudent.getX() + 100, tempStudent.getY() + 30 + tempTask.getHeight());
 
 
-        lastScoredState = Elements.newLabel("Last Scored: --",
-                new Dimension(200, 34),16);
-        VerticalAlign(lastScoredState, "under", winnerState);
-        lastScoredState.setLocation(lastScoredState.getX(), lastScoredState.getY() + 5);
+        // set tasks
+        JLabel previousTask = new JLabel("");
+        for (int i = 0; i < 32; i++) {
+            JLabel task = Elements.newTaskLabel("#" + Integer.toString(i + 1) + ".");
+            VerticalAlign(task, "top");
+            if (i == 0) {
+                HorizontalAlign(task, "left");
+                task.setLocation(task.getX() + tempStudent.getX() + tempStudent.getWidth(), task.getY() + 30);
+            }
+            else {
+                HorizontalAlign(task, "toRight", previousTask);
+                task.setLocation(task.getX(), task.getY() + 30);
+            }
+            previousTask = task;
+        }
+        // set students
+        for (int i = 0; i < lines.size(); i++) {
+            JLabel student = Elements.newStudentLabel((i+1) + ". " + lines.get(i));
+            HorizontalAlign(student, "left");
+            if (i == 0 ) {
+                VerticalAlign(student, "top");
+                student.setLocation(student.getX() + 100, student.getY() + 30 + previousTask.getHeight());
+            }
+            else {
+                VerticalAlign(student, "under", Students.get(i - 1));
+                student.setLocation(student.getX() + 100, student.getY());
+            }
+            Students.add(student);
+        }
+        // delete trash
+        Window.components.remove(tempTask);
+        Window.components.remove(tempStudent);
 
-
-        scoreState = Elements.newLabel("AC Real 0:0  Madrid",
-                new Dimension(400, 150),32);
-        VerticalAlign(scoreState, "under", lastScoredState);
-        scoreState.setLocation(scoreState.getX(), scoreState.getY() + 15);
-
-
-        realBtn = Elements.newButton("++Real",
-                new Dimension(120, 45), 20, scoreState);
-        realBtn.setLocation(realBtn.getX() - 80, realBtn.getY() + 20);
-
-
-        madridBtn = Elements.newButton("++Madrid",
-                new Dimension(120, 45), 20, scoreState);
-        madridBtn.setLocation(madridBtn.getX() + 80, madridBtn.getY() + 20);
     }
 }

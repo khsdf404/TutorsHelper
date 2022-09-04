@@ -9,15 +9,26 @@ public class Elements {
 
     public Elements() {}
 
-    public static JLabel newLabel(String text, Dimension size, int fontSize) {
-        JLabel label = new JLabel(text, SwingConstants.CENTER);
-        label.setSize(size);
-        HorizontalAlign(label, "center");
+    public static JLabel newTaskLabel(String number) {
+        JLabel label = new JLabel(number, SwingConstants.CENTER);
+        label.setSize(24, 24);
         label.setBackground( Color.decode("#777777"));
         label.setForeground(Color.decode("#000000"));
         label.setOpaque(true);
         label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        label.setFont(new Font("Arial", 0, fontSize));
+        label.setFont(new Font("Arial", 0, 10));
+        Window.components.add(label);
+        return label;
+    }
+
+    public static JLabel newStudentLabel(String name) {
+        JLabel label = new JLabel(name, SwingConstants.LEFT);
+        label.setSize(130, 20);
+        label.setBackground( Color.decode("#777777"));
+        label.setForeground(Color.decode("#000000"));
+        label.setOpaque(true);
+        label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        label.setFont(new Font("Arial", 0, 12));
         Window.components.add(label);
         return label;
     }
@@ -41,9 +52,6 @@ public class Elements {
                 madridScore++;
                 lastScored = "Madrid";
             }
-            Grid.UpdateWinner();
-            Grid.UpdateScore();
-            Grid.UpdateLastScored();
         });
         Window.components.add(button);
         return button;

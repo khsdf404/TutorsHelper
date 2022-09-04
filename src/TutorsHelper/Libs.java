@@ -1,15 +1,10 @@
 package TutorsHelper;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
 
 public class Libs {
-    public static int FRAME__WIDTH = 640;
-    public static int FRAME__HEIGHT = 400;
+    public static int FRAME__WIDTH = 1280;
+    public static int FRAME__HEIGHT = 720;
     public static int realScore = 0;
     public static int madridScore = 0;
     public static String lastScored = "--";
@@ -44,7 +39,6 @@ public class Libs {
             button.setLocation(button.getX(), element.getY() - button.getHeight());
         else if (aligment == "under")
             button.setLocation(button.getX(), element.getY() + element.getHeight());
-        else return;
     }
     public static String GetWinner() {
         return  realScore == madridScore ? "DRAW" :
