@@ -1,7 +1,7 @@
 # Added: 
-	--
+	1. merge & commit bat
 # Edited: 
-	.jar
+	1. File system
 #ToDo: 
 	---
 #Deleted: 
