@@ -1,7 +1,7 @@
 # Added: 
-	1. .jar
-# Edited: 
 	--
+# Edited: 
+	.jar
 #ToDo: 
 	---
 #Deleted: 

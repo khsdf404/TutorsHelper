@@ -17,9 +17,9 @@ import static TutorsHelper.Student.getStudents;
 import static TutorsHelper.Task.getTempTask;
 
 public class Checkbox {
-    private static ArrayList<JButton> checkboxList = new ArrayList<>();
-    private static List<String> config = getConfig();
-    private static Dimension size = new Dimension(28, 22);
+    private static final ArrayList<JButton> checkboxList = new ArrayList<>();
+    private static final List<String> config = getConfig();
+    private static final Dimension size = new Dimension(28, 22);
 
     public static void setCheckboxes() {
         for (int i = 0; i < getStudents().size(); i++) {

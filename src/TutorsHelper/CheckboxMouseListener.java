@@ -11,10 +11,9 @@ import static TutorsHelper.Libs.*;
 
 public class CheckboxMouseListener implements MouseListener {
         private final JButton checkbox;
-        int col, row;
-        JLabel xLineLeft, xLineRight;
-        JLabel yLineAbove, yLineUnder;
-
+        private int col, row;
+        private JLabel xLineLeft, xLineRight;
+        private JLabel yLineAbove, yLineUnder;
 
         public CheckboxMouseListener(JButton checkbox) {
                 this.checkbox = checkbox;
@@ -28,6 +27,14 @@ public class CheckboxMouseListener implements MouseListener {
                 );
                 Checkbox.setConfig();
         }
+        public void mouseEntered(MouseEvent e) {
+                addLighting();
+        }
+        public void mouseExited(MouseEvent e) {
+                removeLighting();
+        }
+
+
         private void addLines() {
                 int stepX = Checkbox.getSize().width;
                 int stepY = Checkbox.getSize().height;
@@ -76,15 +83,9 @@ public class CheckboxMouseListener implements MouseListener {
                 Task.getTasks().get(col).setBackground(activeColor);
                 Student.getStudents().get(row).setBackground(activeColor);
         }
-        public void removeLighting() {
+        private void removeLighting() {
                 Task.getTasks().get(col).setBackground(taskColor);
                 Student.getStudents().get(row).setBackground(studentColor);
-        }
-        public void mouseEntered(MouseEvent e) {
-                addLighting();
-        }
-        public void mouseExited(MouseEvent e) {
-                removeLighting();
         }
 
 
