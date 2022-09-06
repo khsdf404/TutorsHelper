@@ -11,7 +11,7 @@ body {
   flex-direction: row;
   height: 70%;
   width: 90%;
-  padding: 12.5% 5% ;
+  padding: 7% 5% ;
   background: rgba(45, 45, 45, 0.9);
 }
 
@@ -20,27 +20,36 @@ body {
   position: relative;
   display: flex;
   flex-direction: row;
-  background: red;
   flex: 1;
 }
 .groupWrapp {
   position: relative;
   display: flex;
+  height: 100%;
   flex-direction: column;
   background: #ccc;
   flex: 20;
 }
 .groupWrapp div {
-  border: .5px solid rgba(0,0,0,0.6);
+  border: .5px solid rgba(0,0,0,0.3);
+  flex: 1;
 }
 .gridWrapp {
   position: relative;
   display: flex;
   flex-direction: column;
-  background: blue;
   flex: 80;
 }
+.taskWrapp {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
 .gridWrapp ul {
+  flex-direction: row;
+  display: flex;
+  flex: 1;
   line-height: 0;
   font-size: 0;
   list-style: none;
@@ -48,9 +57,7 @@ body {
   margin: 0;
 }
 .gridWrapp ul li {
-  display: inline-block;
-  height: 30px;
-  width: 30px;
-  background: orange;
+  flex: 1;
+  background: rgba(255, 67, 89, 0.8);
   border: .5px solid rgba(0,0,0,0.1);
 }

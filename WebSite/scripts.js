@@ -1,17 +1,17 @@
 $('document').ready(function () {
-    let startHeight = $(`.gridWrapp`).outerHeight();
-    function setHeight() {
-        $('.wrapp').css({'height': 30*startHeight/32});
-    }
+
+
     function setTasks() {
         let width = $(`.gridWrapp`).outerWidth();
         $(`.taskWrapp`).append(`<ul></ul>`);
         for (let i = 0; i < 32; i++) {
-           $(`.taskWrapp ul`).append(`<li></li>`);
+           $(`.taskWrapp ul`).append(`<li>${i+1}</li>`);
         }
         $(`.taskWrapp ul li`).css({
-          'width': (startHeight - 32* 2)/32,
-          'height': (startHeight - 32* 2)/32,
+          'display': 'flex',
+          'justify-content': 'center',
+          'align-items': 'center',
+          'font-size': '16px',
           'background': '#ccc'});
     }
     function setGrid() {
@@ -20,26 +20,22 @@ $('document').ready(function () {
           for (let i = 0; i < 32; i++) {
              $(`.taskWrapp ul`).eq(j+1).append(`<li></li>`);
           }
-          $(`.taskWrapp ul li`).css({
-              'width': (startHeight - 32* 2)/32,
-              'height': (startHeight - 32* 2)/32});
         }
     }
     function setStudents() {
       let width = $(`.groupWrapp`).outerWidth();
       for (let i = 0; i < 30; i++) {
-          $(`.groupWrapp`).append(`<div></div>`);
+          $(`.groupWrapp`).append(`<div>${i}. Орлов Данил</div>`);
       }
-      $(`.groupWrapp div`).css({
-        'width': width - 2,
-        'height': (startHeight - 32* 2)/32
-      });
-
-      $(`.groupWrapp div`).eq(0).css({'background': '#454545'})
+      $(`.groupWrapp div`).eq(0).css({
+        'color': 'rgba(45, 45, 45, 0)',
+        'background': 'rgba(45, 45, 45, 0.85)',
+        'border-top': '0',
+        'border-left': '0'})
     }
 
 
-    setHeight();
+
     setTasks();
     setGrid();
     setStudents();
