@@ -109,6 +109,8 @@ string getHTML() {
 				flex: 1;
 				border-radius: 3px;
 				background: #bbb;
+				font-size: 14px;
+				overflow: hidden;
 			}}
 			.gridWrapp {{
 				position: relative;
@@ -179,15 +181,19 @@ string getHTML() {
 					}}
 					function setStudents() {{
 						let width = $(`.groupWrapp`).outerWidth();
-						$(`.groupWrapp`).append(`<div></div>`);
+						$(`.groupWrapp`).append(`<div>123</div>`);
 						for (let i = 0; i < 29; i++) {{
 								$(`.groupWrapp`).append(`<div>  ${{i + 1}}. ${{groupList[i]}}</div>`);
 						}}
 						$(`.groupWrapp div`).eq(0).css({{
 							'color': 'rgba(45, 45, 45, 0)',
 							'background': 'transparent',
-							'border-top': '0',
-							'border-left': '0'}})
+							'border-top': '1px solid',
+							'border-left': '1px solid'
+						}});
+						$(`.groupWrapp div`).css({{
+							'max-height': $(`.taskWrapp ul li`).eq(0).outerHeight()
+						}});
 					}}
 
 					setTasks();
