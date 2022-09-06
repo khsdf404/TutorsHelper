@@ -24,12 +24,13 @@ body {
   display: flex;
   height: 100%;
   flex-direction: column;
-  background: #ccc;
   flex: 20;
 }
 .groupWrapp div {
   border: .5px solid rgba(0,0,0,0.3);
   flex: 1;
+  border-radius: 3px;
+  background: #bbb;
 }
 .gridWrapp {
   position: relative;
@@ -55,6 +56,12 @@ body {
 }
 .gridWrapp ul li {
   flex: 1;
-  background: rgba(255, 67, 89, 0.8);
   border: .5px solid rgba(0,0,0,0.1);
+  border-radius: 1.5px;
+}
+.liTrue {
+  background: rgba(108, 180, 255, 1);
+}
+.liFalse {
+  background: rgba(255, 67, 89, 0.8);
 }
