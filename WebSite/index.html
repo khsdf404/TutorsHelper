@@ -69,9 +69,14 @@
 			}
 			.gridWrapp ul li {
 				flex: 1;
-				background: rgba(255, 67, 89, 0.8);
 				border: .5px solid rgba(0,0,0,0.1);
 				border-radius: 1.5px;
+			}
+			.liTrue {
+				background: rgba(108, 180, 255, 1);
+			}
+			.liFalse {
+				background: rgba(255, 67, 89, 0.8);
 			}
 	</style>
 
@@ -86,16 +91,7 @@
 
 
 	<script type="text/javascript">
-			$('document').ready(function () {
-					let groupList = [ "Астахов Никита Иванович",
-					  "Борисов Денис Александрович",
-						" Вдовичев Никита Сергеевич ",
-						" Жирнов Никита Игоревич ",
-						" Заикин Даниил Юрьевич ",
-						" Зворыкин Глеб Игоревич ",
-						" Козлова Мария  ",
-						" Крутиков Никита ",  " Лосев Антон ",  " Макарова Александра ",  " Муратор Тимур ",  " Назаренко Екатерина ",  " Никитин Артём ",  " Новоселова Татьяна ",  " Орлов Данил ",  " Пискун Дмитрий ",  " Проходцев Сергей ",  " Рахманов Амир ",  " Редков Максим ",  " Романенко Андрей ",
-						" Рыжков Александр ",  " Семенов Александр ",  " Семянников Никита ",  " Степанов Константин ",  " Чеснаков Максим ",  " Чикилев Данил ",  " Чуркин Максим ",  " Широков Антон ",  "Шрестха Алекс" ];
+			$('document').ready(function () { 
 					function setTasks() {
 							let width = $(`.gridWrapp`).outerWidth();
 							$(`.taskWrapp`).append(`<ul></ul>`);
@@ -113,7 +109,8 @@
 							for (let j = 0; j < 29; j++) {
 								$(`.taskWrapp`).append(`<ul></ul>`);
 								for (let i = 0; i < 32; i++) {
-									 $(`.taskWrapp ul`).eq(j+1).append(`<li></li>`);
+										let cl =  taskList[j][i]  == `+` ? 'liTrue' : 'liFalse';
+									 	$(`.taskWrapp ul`).eq(j+1).append(`<li class=${cl}></li>`);
 								}
 							}
 					}
@@ -121,7 +118,7 @@
 						let width = $(`.groupWrapp`).outerWidth();
 						$(`.groupWrapp`).append(`<div></div>`);
 						for (let i = 0; i < 29; i++) {
-								$(`.groupWrapp`).append(`<div>  ${i+1}. ${groupList[i]}</div>`);
+								// $(`.groupWrapp`).append(`<div>  ${i+1}. ${groupList[i]}</div>`);
 						}
 						$(`.groupWrapp div`).eq(0).css({
 							'color': 'rgba(45, 45, 45, 0)',
