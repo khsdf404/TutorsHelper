@@ -1,6 +1,5 @@
 $('document').ready(function () {
 
-
     function setTasks() {
         let width = $(`.gridWrapp`).outerWidth();
         $(`.taskWrapp`).append(`<ul></ul>`);
@@ -25,7 +24,7 @@ $('document').ready(function () {
     function setStudents() {
       let width = $(`.groupWrapp`).outerWidth();
       for (let i = 0; i < 30; i++) {
-          $(`.groupWrapp`).append(`<div>${i}. Орлов Данил</div>`);
+          $(`.groupWrapp`).append(`<div>${i}. </div>`);
       }
       $(`.groupWrapp div`).eq(0).css({
         'color': 'rgba(45, 45, 45, 0)',
@@ -33,8 +32,6 @@ $('document').ready(function () {
         'border-top': '0',
         'border-left': '0'})
     }
-
-
 
     setTasks();
     setGrid();
