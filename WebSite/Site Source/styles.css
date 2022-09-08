@@ -34,6 +34,7 @@ body {
   overflow: hidden;
   display: flex;
   align-items: center;
+  padding-left: 5%;
 }
 .gridWrapp {
   position: relative;

@@ -1,51 +1,66 @@
-﻿using System.Diagnostics; 
-using Microsoft.Win32; 
+﻿using System.Diagnostics;
+using System.Text;
+using System.Text.RegularExpressions;
+using Microsoft.Win32;
 
-namespace Program { 
+namespace Program
+{
 
-class Program {
-		static void Main(string[] args) {
+    class Program
+    {
+
+        static void Main(string[] args)
+        {
             Console.WriteLine("		Wait...");
-            openHTML(); 
+            openHTML();
         }
 
 
-		static int getAmount(string str) { 
-			int max = 0;
-			while (++max < 1000) 
-				if (str.IndexOf($@"id=""LC{max}""") == -1) 
-					return (max - 1);
+        static int getAmount(string str)
+        {
+            int max = 0;
+            while (++max < 1000)
+                if (str.IndexOf($@"id=""LC{max}""") == -1)
+                    return (max - 1);
             return 2;
-		} 
+        }
 
-        static string[] getGroup() {
+        static string[] getGroup()
+        {
             string groupTxt = "";
-            try {
+            try
+            {
                 Uri uri = new Uri("https://github.com/khsdf404/TutorsHelper/blob/main/Executable/GroupMembers.txt");
 
-                string html = new System.Net.WebClient().DownloadString(uri);
-				string areaForSearching = html
-					.Split("id=\"spoof-warning\"")[1]
-					.Split("</table>")[0]; 
-                for (int i = 0; i < getAmount(areaForSearching); i++) {
-                    groupTxt += areaForSearching
-                            .Split("<td id=\"LC" + (i + 1) + "\" class=\"blob-code blob-code-inner js-file-line\">")[1]
-                            .Split("</td>")[0];
+                System.Net.WebClient client = new System.Net.WebClient();
+                client.Encoding = Encoding.UTF8;
+                string html = client.DownloadString(uri);
+                string areaForSearching = Regex.Split(html, @"id=""spoof-warning""")[1];
+                areaForSearching = Regex.Split(html, ("</table>"))[0];
+                string areaSaver = areaForSearching;
+                for (int i = 0; i < getAmount(areaForSearching); i++)
+                {
+                    areaForSearching = Regex.Split(areaForSearching, $@"<td id=""LC{i + 1}"" class=""blob-code blob-code-inner js-file-line"">")[1];
+                    groupTxt += Regex.Split(areaForSearching, "</td>")[0];
                     groupTxt += "\n";
+                    areaForSearching = areaSaver;
                 }
                 groupTxt = groupTxt.Substring(0, groupTxt.Length - 1);
-                return groupTxt.Split("\n");
+
+                return Regex.Split(groupTxt, @"\n");
             }
-            catch {
+            catch
+            {
                 return new string[0];
             }
         }
-        static string groupToJsArray() {
+        static string groupToJsArray()
+        {
             string output = "[ ";
-            string[] groupList = getGroup(); 
+            string[] groupList = getGroup();
             for (int i = 0; i < groupList.Length - 1; i++)
                 output += @" """ + groupList[i] + @""", ";
-            output += $@" ""{groupList[groupList.Length - 1]}"" ]  "; 
+            output += $@" ""{groupList[groupList.Length - 1]}"" ]  ";
             return output;
         }
 
@@ -56,38 +71,44 @@ class Program {
             {
                 Uri uri = new Uri("https://github.com/khsdf404/TutorsHelper/blob/main/Executable/TasksConfig.txt");
 
-                string html = new System.Net.WebClient().DownloadString(uri);
-                string areaForSearching = html
+                System.Net.WebClient client = new System.Net.WebClient();
+                client.Encoding = Encoding.UTF8;
+                string html = client.DownloadString(uri);
+                string areaForSearching = Regex.Split(html, ("id=\"spoof-warning\""))[1];
+                areaForSearching = Regex.Split(html, ("</table>"))[0];
+                string areaSaver = areaForSearching;
+                /*string areaForSearching = html
                      .Split("id=\"spoof-warning\"")[1]
-                     .Split("</table>")[0];
+                     .Split("</table>")[0];*/
                 for (int i = 0; i < getAmount(areaForSearching); i++)
                 {
-                    tasksTxt += areaForSearching
-                            .Split("<td id=\"LC" + (i + 1) + "\" class=\"blob-code blob-code-inner js-file-line\">")[1]
-                            .Split("</td>")[0];
+                    areaForSearching = Regex.Split(areaForSearching, $@"<td id=""LC{i + 1}"" class=""blob-code blob-code-inner js-file-line"">")[1];
+                    tasksTxt += Regex.Split(areaForSearching, "</td>")[0];
                     tasksTxt += "\n";
+                    areaForSearching = areaSaver;
                 }
                 tasksTxt = tasksTxt.Substring(0, tasksTxt.Length - 1);
-                return tasksTxt.Split("\n");
+                return Regex.Split(tasksTxt, @"\n");
             }
             catch
             {
                 return new string[0];
             }
         }
-        static string taskToJsArray() {
+        static string taskToJsArray()
+        {
             string output = "[ ";
             string[] taskList = getTasks();
             for (int i = 0; i < taskList.Length - 1; i++)
                 output += @" """ + taskList[i] + @""", ";
-            output += $@" ""{taskList[taskList.Length - 1]}"" ]  "; 
+            output += $@" ""{taskList[taskList.Length - 1]}"" ]  ";
             return output;
         }
 
 
         static string getHTML()
         {
-            string htmlCode = @$"
+            string htmlCode = $@"
         <!doctype html>
 <html>
 <head>
@@ -95,9 +116,7 @@ class Program {
 	<meta http-equiv=""X-UA-Compatible"" content=""IE=Edge"">
 	<title>IKBO-02-21</title>
 	<script src=""https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js""></script>
-	<!-- <link rel=""stylesheet"" href=""styles.css"">  -->
-
-	<!-- <script type=""text/javascript"" src=""scripts.js""></script> -->
+ 
 </head>
 <body>
 	<style media=""screen"">
@@ -132,6 +151,7 @@ body {{position: relative;
   overflow: hidden;
   display: flex;
   align-items: center;
+  padding-left: 5%;
 }}
 .gridWrapp {{position: relative;
   display: flex;
