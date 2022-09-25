@@ -22,7 +22,7 @@ public class CheckboxMouseListener implements MouseListener {
         public void mouseClicked(MouseEvent e) {
                 checkbox.setBackground(
                         checkbox.getBackground() == checkBoxColor__false ?
-                                checkBoxColor__true :
+                                checkBoxColor__waiting :
                                 checkBoxColor__false
                 );
                 Checkbox.setConfig();
