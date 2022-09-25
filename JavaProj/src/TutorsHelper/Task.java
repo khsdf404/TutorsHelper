@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import static TutorsHelper.Libs.*;
 import static TutorsHelper.Libs.HorizontalAlign;
-import static TutorsHelper.Student.getTempStudent;
 
 public class Task {
     private static Dimension size = new Dimension(28, 22);
@@ -20,7 +19,7 @@ public class Task {
             VerticalAlign(task, "top");
             if (i == 0) {
                 HorizontalAlign(task, "left");
-                task.setLocation(task.getX() + getTempStudent().getX() + getTempStudent().getWidth(), task.getY() + 30);
+                task.setLocation(task.getX() + UpdateButton.getBtn().getX() + UpdateButton.getBtn().getWidth(), task.getY() + 30);
             }
             else {
                 HorizontalAlign(task, "toRight", previousTask);

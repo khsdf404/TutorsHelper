@@ -21,25 +21,11 @@ public class Checkbox {
     private static final List<String> config = getConfig();
     private static final Dimension size = new Dimension(28, 22);
 
-    public static void setCheckboxes() {
-        for (int i = 0; i < getStudents().size(); i++) {
-            JLabel currStudent = getStudents().get(i);
-            int startX = currStudent.getX() + currStudent.getWidth();
-            int yPos = currStudent.getY();
-            for (int j = 0; j < tasksAmount; j++) {
-                int xPos = startX + getTempTask().getWidth() * j;
-                JButton checkbox = newCheckbox();
-                checkbox.setLocation(xPos, yPos);
-                checkboxList.add(checkbox);
-            }
-        }
-        ConfigureCheckboxes();
-    }
+    public static Dimension getSize() { return size; }
     public static ArrayList<JButton> getCheckboxes() {
         return checkboxList;
     }
 
-    public static Dimension getSize() { return size; }
 
     private static JButton newCheckbox() {
         JButton checkbox = new JButton();
@@ -60,6 +46,21 @@ public class Checkbox {
         // Window.mainPanel.add(line, 2, 0);
         return line;
     }
+    public static void setCheckboxes() {
+        for (int i = 0; i < getStudents().size(); i++) {
+            JLabel currStudent = getStudents().get(i);
+            int startX = currStudent.getX() + currStudent.getWidth();
+            int yPos = currStudent.getY();
+            for (int j = 0; j < tasksAmount; j++) {
+                int xPos = startX + getTempTask().getWidth() * j;
+                JButton checkbox = newCheckbox();
+                checkbox.setLocation(xPos, yPos);
+                checkboxList.add(checkbox);
+            }
+        }
+        ConfigureCheckboxes();
+    }
+
 
     private static List<String> getConfig() {
         try {
@@ -71,10 +72,15 @@ public class Checkbox {
     public static void setConfig() {
         StringBuilder updatedConfig = new StringBuilder();
         int cnt = 0;
-        for (JButton checkbox:
-                checkboxList) {
-            updatedConfig.append(checkbox.getBackground() == checkBoxColor__true ?
-                    "+" : "-");
+        for (JButton checkbox: checkboxList) {
+            Color background = checkbox.getBackground();
+            updatedConfig.append(
+                background == checkBoxColor__true ?
+                    "+" :
+                    background == checkBoxColor__waiting ?
+                        "&" :
+                        "-"
+            );
             updatedConfig.append(cnt % tasksAmount == (tasksAmount - 1) && cnt != tasksAmount * getStudents().size() - 1 ?
                     "\n" : "");
             cnt++;
@@ -88,18 +94,19 @@ public class Checkbox {
     }
     public static void ConfigureCheckboxes() {
         if (config.size() != getStudents().size()) {
-            for (JButton checkbox:
-                 checkboxList) {
+            for (JButton checkbox: checkboxList)
                 checkbox.setBackground(checkBoxColor__false);
-            }
             return;
         }
         for(int i = 0; i < config.size(); i++) {
             for (int j = 0; j < tasksAmount; j++) {
+                char state = config.get(i).charAt(j);
                 checkboxList.get(i*tasksAmount + j).setBackground(
-                        config.get(i).charAt(j) == '+' ?
+                        state == '+' ?
                                 checkBoxColor__true :
-                                checkBoxColor__false
+                                state == '&' ?
+                                    checkBoxColor__waiting :
+                                    checkBoxColor__false
                 );
             }
         }

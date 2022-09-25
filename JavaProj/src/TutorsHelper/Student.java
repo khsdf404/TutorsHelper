@@ -14,16 +14,25 @@ import static TutorsHelper.Task.getTempTask;
 
 public class Student {
     private static ArrayList<JLabel> studentList = new ArrayList<>();
-    private static JLabel tempStudent = setTempStudent();
+    public static ArrayList<JLabel> getStudents() {
+        return studentList;
+    }
+    private static List<String> getConfig() {
+        try {
+            return Files.readAllLines(Paths.get("GroupMembers.txt"), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public static void setStudents() {
-        // set students
-        for (int i = 0; i < getStudentsList().size(); i++) {
-            JLabel student = newStudentLabel("  " + (i+1) + ". " + getStudentsList().get(i));
+        List<String> studentConfig = getConfig();
+        for (int i = 0; i < studentConfig.size(); i++) {
+            JLabel student = newStudentLabel("  " + (i+1) + ". " + studentConfig.get(i));
             HorizontalAlign(student, "left");
             if (i == 0 ) {
-                VerticalAlign(student, "top");
-                student.setLocation(student.getX() + 100, student.getY() + 30 + Task.getSize().height);
+                VerticalAlign(student, "under", UpdateButton.getBtn());
+                student.setLocation(student.getX() + 100, student.getY());
             }
             else {
                 VerticalAlign(student, "under", studentList.get(i - 1));
@@ -32,9 +41,7 @@ public class Student {
             studentList.add(student);
         }
     }
-    public static ArrayList<JLabel> getStudents() {
-        return studentList;
-    }
+
 
     private static JLabel newStudentLabel(String name) {
         JLabel label = new JLabel(name, SwingConstants.LEFT);
@@ -48,23 +55,5 @@ public class Student {
         return label;
     }
 
-    private static List<String> getStudentsList() {
-        try {
-            return Files.readAllLines(Paths.get("GroupMembers.txt"), StandardCharsets.UTF_8);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private static JLabel setTempStudent() {
-        JLabel label = newStudentLabel("temp");
-        HorizontalAlign(label, "left");
-        VerticalAlign(label, "top");
-        label.setLocation(label.getX() + 100, label.getY() + 30 + getTempTask().getHeight());
-        return label;
-    }
-    public static JLabel getTempStudent() {
-        return tempStudent;
-    }
 }
 

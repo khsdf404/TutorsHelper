@@ -1,7 +1,7 @@
 # Added: 
-	1. merge & commit bat
+	1. waiting task status
 # Edited: 
-	1. File system
+	---
 #ToDo: 
 	---
 #Deleted: 

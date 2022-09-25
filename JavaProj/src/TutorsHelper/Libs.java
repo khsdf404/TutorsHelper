@@ -10,7 +10,9 @@ public class Libs {
     public static Color backgroundColor = Color.decode("#1F2833");
     public static Color taskColor = Color.decode("#bbbbbb");
     public static Color studentColor = Color.decode("#bbbbbb");
+    public static Color updatedBtnColor = Color.decode("#aaaaaa");
     public static Color activeColor = Color.decode("#eeeeee");
+    public static Color checkBoxColor__waiting = Color.decode("#4060ed");
     public static Color checkBoxColor__true = Color.decode("#AFD275");
     public static Color checkBoxColor__false = Color.decode("#CC8Ea3");
     public static Color borderColor = Color.decode("#4d5542");
